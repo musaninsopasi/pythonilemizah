@@ -1,1 +1,47 @@
-import turtle def koch(t,n): #Define a function Koch curve, complete the drawing function if n <5 : t.fd(n) return m = n/3 koch(t,m) t.lt(60) koch(t,m) t.rt(120) koch(t,m) t.lt(60) koch(t,m) def snowflake(t, n): # Draw a snowflake, each side is a Koch curve for i in range(3): koch(t,n) t.rt(120) bob = turtle.Turtle() bob.color('black') bob.penup() # Brush up (cannot draw) bob.goto(-150,90) #Go to this point bob.pendown() # Pen down (start drawing) snowflake(bob,300) # Call the function to start drawing snowflakes turtle.mainloop()
+import turtle
+import random
+  
+wn = turtle.Screen()
+wn.bgcolor("cyan")
+  
+elsa = turtle.Turtle()
+elsa.speed(15)
+  
+sfcolor = ["white", "blue", "purple", "grey", "magenta"]
+  
+def snowflake(size):
+  
+    elsa.penup()
+    elsa.forward(10*size)
+    elsa.left(45)
+    elsa.pendown()
+    elsa.color(random.choice(sfcolor))
+  
+    for i in range(8):
+        branch(size)   
+        elsa.left(45)
+      
+  
+def branch(size):
+    for i in range(3):
+        for i in range(3):
+            elsa.forward(10.0*size/3)
+            elsa.backward(10.0*size/3)
+            elsa.right(45)
+        elsa.left(90)
+        elsa.backward(10.0*size/3)
+        elsa.left(45)
+    elsa.right(90) 
+    elsa.forward(10.0*size)
+  
+
+for i in range(20):
+    x = random.randint(-200, 200)
+    y = random.randint(-200, 200)
+    sf_size = random.randint(1, 4)
+    elsa.penup()
+    elsa.goto(x, y)
+    elsa.pendown()
+    snowflake(sf_size)
+  
+wn.exitonclick()  
